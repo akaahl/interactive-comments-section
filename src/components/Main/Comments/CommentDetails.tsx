@@ -1,4 +1,5 @@
 // import { ReactComponent as ReplyIcon } from "../../../assets/images/icon-reply.svg";
+import image from "../../../assets/images/avatars/image-maxblagun.webp";
 
 interface Props {
   content: string;
@@ -19,11 +20,16 @@ const CommentDetails = ({ content, createdAt, replies, user }: Props) => {
     image: { webp },
   } = user;
 
+  const imagePath = (path: string) => {
+    return `/src/assets/${path}`;
+  };
+  console.log();
+
   return (
     <div className="flex-1 ml-6 ">
       <div className="flex items-center">
-        <div className="bg-teal-500 h-7 w-7 rounded-full">
-          <img src={webp} alt="user" />
+        <div className="bg-teal-500 h-8 w-8 rounded-full flex items-center justify-center">
+          <img src={imagePath(webp)} alt="user" className="object-cover" />
         </div>
         <p className="font-medium ml-3">{username}</p>
         <p className="font-normal ml-3 text-neutral-grayish-blue">
