@@ -5,7 +5,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="min-w-screen min-h-screen bg-neutral-very-light-gray font-rubik py-16 flex justify-center">
+    <div className="min-w-screen flex min-h-screen justify-center bg-neutral-very-light-gray py-16 font-rubik">
       <Main />
     </div>
   );

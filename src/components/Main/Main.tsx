@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import Comments from "./Comments/Comments";
+import React, { useEffect, useState } from 'react';
+import Comments from './Comments/Comments';
+import NewComment from './NewComment/NewComment';
 
 interface Data {
   comments: [];
@@ -11,7 +12,7 @@ const Main = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("../../data.json");
+      const res = await fetch('../../data.json');
       const data = await res.json();
       setData(data);
     };
@@ -21,8 +22,8 @@ const Main = () => {
 
   console.log(data);
   return (
-    <main className="w-[55%] h-auto space-y-5">
-      {data.comments &&
+    <main className="h-auto w-[55%]">
+      {data.comments.length &&
         data.comments.map(
           ({ id, content, createdAt, score, replies, user }, index) => (
             <Comments
@@ -36,6 +37,7 @@ const Main = () => {
             />
           )
         )}
+      <NewComment currentUser={data.currentUser} />
     </main>
   );
 };

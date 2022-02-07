@@ -1,5 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Rubik:wght@300;400;500;600;700;800;900&family=Secular+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Rubik:wght@300;400;500;600;700;800;900&family=Secular+One&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .comment-wrapper {
+    @apply flex w-full items-start rounded-md bg-white p-6;
+  }
+}
