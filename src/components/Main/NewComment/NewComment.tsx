@@ -1,23 +1,17 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
+import { dataAtom } from '../../../App';
 
-interface Props {
-  currentUser: {
-    image?: {
-      png: string;
-      webp: string;
-    };
-    username?: string;
-  };
-}
-
-const NewComment = ({ currentUser }: Props) => {
-  const { image, username } = currentUser;
+const NewComment = () => {
+  const data = useRecoilValue(dataAtom);
+  //   const { image, username } = data?.currentUser;
+  console.log(data);
 
   return (
     <div className="comment-wrapper items-[initial] mt-8 justify-between">
       <div className="flex items-center justify-center self-center">
         <img
-          src={`src/assets/${image?.webp.slice(1)}`}
+          src={`src/assets/${data?.currentUser?.image?.webp.slice(1)}`}
           alt="current user"
           className="h-8 w-8 rounded-full object-cover"
         />

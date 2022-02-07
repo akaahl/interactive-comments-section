@@ -38,7 +38,7 @@ const Comments = ({ id, content, createdAt, score, replies, user }: Props) => {
         >
           {replies.map(
             ({ content, createdAt, user, id, score, replyingTo }, index) => (
-              <li className="comment-wrapper not-first:mt-2">
+              <li className="comment-wrapper not-first:mt-2" key={index}>
                 <VoteButton score={score} />
                 <CommentDetails
                   content={content}
