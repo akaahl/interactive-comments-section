@@ -19,7 +19,7 @@ const ReplyButton = ({ setReplyField, replyField }: Props) => {
         />
       </svg>
       <span
-        className="ml-2 font-medium text-primary-moderate-blue transition-all duration-200 
+        className="ml-1 font-medium text-primary-moderate-blue transition-all duration-200 
             ease-in-out group-hover:text-primary-light-grayish-blue"
       >
         Reply

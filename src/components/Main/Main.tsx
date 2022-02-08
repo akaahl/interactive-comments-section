@@ -10,7 +10,7 @@ const Main = () => {
   console.log(data);
 
   return (
-    <main className="h-auto w-[55%]">
+    <main className="h-auto w-[700px]">
       {data.comments &&
         data.comments.map(
           ({ id, content, createdAt, score, replies, user }, index) => (

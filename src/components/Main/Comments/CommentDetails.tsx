@@ -1,4 +1,6 @@
 import { Props } from './Comments';
+import DeleteButton from './DeleteButton';
+import EditButton from './Edit Button';
 import ReplyButton from './ReplyButton';
 
 interface NewProps extends Props {
@@ -31,7 +33,7 @@ const CommentDetails = ({
         </div>
         <p className="ml-3 font-medium">{username}</p>
         {username === 'juliusomo' && (
-          <p className="ml-3 bg-primary-moderate-blue py-[2px] px-[4px] font-semibold text-white">
+          <p className="ml-3 rounded-sm bg-primary-moderate-blue py-[2px] px-[6px] text-sm font-semibold text-white">
             you
           </p>
         )}
@@ -39,7 +41,16 @@ const CommentDetails = ({
           {createdAt}
         </p>
 
-        <ReplyButton setReplyField={setReplyField} replyField={replyField} />
+        {username === 'juliusomo' && (
+          <div className="ml-auto mr-0 flex items-center">
+            <DeleteButton />
+            <EditButton />
+          </div>
+        )}
+
+        {username !== 'juliusomo' && (
+          <ReplyButton setReplyField={setReplyField} replyField={replyField} />
+        )}
       </div>
 
       <div>

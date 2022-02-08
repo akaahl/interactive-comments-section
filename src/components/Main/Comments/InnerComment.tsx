@@ -17,7 +17,7 @@ const InnerComment = ({
   return (
     <>
       <li className="comment-wrapper not-first:mt-2">
-        <VoteButton score={score} />
+        <VoteButton score={score} username={username} />
         <CommentDetails
           content={content}
           createdAt={createdAt}

@@ -5,7 +5,7 @@ import InnerComment from './InnerComment';
 import VoteButton from './VoteButton';
 
 export interface Props {
-  id?: number;
+  id?: number | undefined;
   content: string;
   createdAt: string;
   score?: number;
@@ -26,7 +26,7 @@ const Comments = ({ id, content, createdAt, score, replies, user }: Props) => {
   return (
     <>
       <section className="comment-wrapper not-first:mt-6">
-        <VoteButton score={score} />
+        <VoteButton score={score} username={username} />
         <CommentDetails
           content={content}
           createdAt={createdAt}

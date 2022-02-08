@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import Main from './components/Main/Main';
 import { atom, useRecoilState } from 'recoil';
+import { Props } from './components/Main/Comments/Comments';
 
 interface Data {
-  comments: [];
+  comments: Props[];
   currentUser: {
     image: {
       png: string;
