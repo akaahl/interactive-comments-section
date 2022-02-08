@@ -1,15 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Main from './components/Main/Main';
 import { atom, useRecoilState } from 'recoil';
 
 interface Data {
   comments: [];
   currentUser: {
-    image?: {
+    image: {
       png: string;
       webp: string;
     };
-    username?: string;
+    username: string;
   };
 }
 
@@ -31,6 +31,8 @@ function App() {
 
     fetchData();
   }, []);
+
+  // console.log(data);
 
   return (
     <div

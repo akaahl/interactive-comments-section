@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import NewComment from '../NewComment/NewComment';
 import CommentDetails from './CommentDetails';
+import InnerComment from './InnerComment';
 import VoteButton from './VoteButton';
 
 export interface Props {
@@ -19,6 +21,8 @@ export interface Props {
 }
 
 const Comments = ({ id, content, createdAt, score, replies, user }: Props) => {
+  const { username } = user;
+  const [replyField, setReplyField] = useState<boolean>(false);
   return (
     <>
       <section className="comment-wrapper not-first:mt-6">
@@ -28,8 +32,12 @@ const Comments = ({ id, content, createdAt, score, replies, user }: Props) => {
           createdAt={createdAt}
           replies={replies}
           user={user}
+          replyField={replyField}
+          setReplyField={setReplyField}
         />
       </section>
+
+      {replyField && <NewComment reply={true} username={username} />}
 
       {replies?.length ? (
         <ul
@@ -38,18 +46,15 @@ const Comments = ({ id, content, createdAt, score, replies, user }: Props) => {
         >
           {replies.map(
             ({ content, createdAt, user, id, score, replyingTo }, index) => (
-              <li className="comment-wrapper not-first:mt-2" key={index}>
-                <VoteButton score={score} />
-                <CommentDetails
-                  content={content}
-                  createdAt={createdAt}
-                  user={user}
-                  id={id}
-                  score={score}
-                  replyingTo={replyingTo}
-                  key={index}
-                />
-              </li>
+              <InnerComment
+                content={content}
+                createdAt={createdAt}
+                user={user}
+                id={id}
+                key={index}
+                score={score}
+                replyingTo={replyingTo}
+              />
             )
           )}
         </ul>

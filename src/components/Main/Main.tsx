@@ -11,19 +11,18 @@ const Main = () => {
 
   return (
     <main className="h-auto w-[55%]">
-      {data?.comments &&
-        React.Children.toArray(
-          data.comments.map(
-            ({ id, content, createdAt, score, replies, user }) => (
-              <Comments
-                id={id}
-                content={content}
-                createdAt={createdAt}
-                score={score}
-                replies={replies}
-                user={user}
-              />
-            )
+      {data.comments &&
+        data.comments.map(
+          ({ id, content, createdAt, score, replies, user }, index) => (
+            <Comments
+              key={index}
+              id={id}
+              content={content}
+              createdAt={createdAt}
+              score={score}
+              replies={replies}
+              user={user}
+            />
           )
         )}
       <NewComment />
