@@ -12,15 +12,24 @@ export interface Props {
   replies?: [];
   replyingTo?: string;
   user: {
-    username: string;
+    username: string | undefined;
     image: {
       png: string;
       webp: string;
     };
   };
+  newComment?: boolean;
 }
 
-const Comments = ({ id, content, createdAt, score, replies, user }: Props) => {
+const Comments = ({
+  id,
+  content,
+  createdAt,
+  score,
+  replies,
+  user,
+  newComment,
+}: Props) => {
   const { username } = user;
   const [replyField, setReplyField] = useState<boolean>(false);
   return (
@@ -34,6 +43,7 @@ const Comments = ({ id, content, createdAt, score, replies, user }: Props) => {
           user={user}
           replyField={replyField}
           setReplyField={setReplyField}
+          newComment={newComment}
         />
       </section>
 

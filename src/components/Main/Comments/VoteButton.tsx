@@ -4,7 +4,7 @@ import minusIcon from '../../../assets/images/icon-minus.svg';
 
 interface Props {
   score: number | undefined;
-  username: string;
+  username: string | undefined;
 }
 
 const VoteButton = ({ score, username }: Props) => {

@@ -13,7 +13,10 @@ const Main = () => {
     <main className="h-auto w-[700px]">
       {data.comments &&
         data.comments.map(
-          ({ id, content, createdAt, score, replies, user }, index) => (
+          (
+            { id, content, createdAt, score, replies, user, newComment },
+            index
+          ) => (
             <Comments
               key={index}
               id={id}
@@ -22,6 +25,7 @@ const Main = () => {
               score={score}
               replies={replies}
               user={user}
+              newComment={newComment}
             />
           )
         )}

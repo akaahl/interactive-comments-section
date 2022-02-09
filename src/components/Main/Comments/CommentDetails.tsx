@@ -2,6 +2,7 @@ import { Props } from './Comments';
 import DeleteButton from './DeleteButton';
 import EditButton from './Edit Button';
 import ReplyButton from './ReplyButton';
+import TimeAgo from 'timeago-react';
 
 interface NewProps extends Props {
   replyField: boolean;
@@ -15,6 +16,7 @@ const CommentDetails = ({
   user,
   replyField,
   setReplyField,
+  newComment,
 }: NewProps) => {
   const {
     username,
@@ -32,14 +34,27 @@ const CommentDetails = ({
           <img src={imagePath(webp)} alt="user" className="object-cover" />
         </div>
         <p className="ml-3 font-medium">{username}</p>
-        {username === 'juliusomo' && (
-          <p className="ml-3 rounded-sm bg-primary-moderate-blue py-[2px] px-[6px] text-sm font-semibold text-white">
-            you
+        {username === 'juliusomo' ? (
+          <>
+            <p className="ml-3 rounded-sm bg-primary-moderate-blue py-[2px] px-[6px] text-sm font-semibold text-white">
+              you
+            </p>
+            {newComment ? (
+              <TimeAgo
+                datetime={createdAt}
+                className="ml-3 font-normal text-neutral-grayish-blue"
+              />
+            ) : (
+              <p className="ml-3 font-normal text-neutral-grayish-blue">
+                {createdAt}
+              </p>
+            )}
+          </>
+        ) : (
+          <p className="ml-3 font-normal text-neutral-grayish-blue">
+            {createdAt}
           </p>
         )}
-        <p className="ml-3 font-normal text-neutral-grayish-blue">
-          {createdAt}
-        </p>
 
         {username === 'juliusomo' && (
           <div className="ml-auto mr-0 flex items-center">

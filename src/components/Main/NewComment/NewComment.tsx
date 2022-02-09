@@ -2,38 +2,43 @@ import React, { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { dataAtom } from '../../../App';
 import { Props } from '../Comments/Comments';
+import moment from 'moment';
+import Moment from 'react-moment';
 
-interface Props {
+interface NewProps {
   reply?: boolean;
   username?: string;
 }
 
-const NewComment = ({ reply, username }: Props) => {
+const NewComment = ({ reply, username }: NewProps) => {
   const [data, setData] = useRecoilState(dataAtom);
   const [textArea, setTextArea] = useState<string>('');
   //   const { image, username } = data?.currentUser;
   // console.log(data.currentUser);
+  // console.log(start);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const start = moment().startOf('hour').fromNow();
 
     const newReply: Props = {
       id: data.comments.length + 1,
       content: textArea,
-      createdAt: 'to be defined',
+      createdAt: Date.now().toString(),
       replies: [],
       score: 0,
       user: {
-        username,
+        username: data.currentUser.username,
         image: data.currentUser.image,
       },
+      newComment: true,
     };
 
-    console.log(newReply);
     setData({
       ...data,
-      comments: data.comments.push(newReply),
+      comments: [...data.comments, newReply],
     });
+    console.log(newReply);
   };
 
   return (
