@@ -1,27 +1,21 @@
 import React, { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { dataAtom } from '../../../App';
-import { Props } from '../Comments/Comments';
-import moment from 'moment';
-import Moment from 'react-moment';
+import { CommentsProps } from '../Comments/Comments';
 
-interface NewProps {
+interface NewCommentProps {
   reply?: boolean;
   username?: string;
 }
 
-const NewComment = ({ reply, username }: NewProps) => {
+const NewComment = ({ reply = false, username }: NewCommentProps) => {
   const [data, setData] = useRecoilState(dataAtom);
   const [textArea, setTextArea] = useState<string>('');
-  //   const { image, username } = data?.currentUser;
-  // console.log(data.currentUser);
-  // console.log(start);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const start = moment().startOf('hour').fromNow();
 
-    const newReply: Props = {
+    const newReply: CommentsProps = {
       id: data.comments.length + 1,
       content: textArea,
       createdAt: Date.now().toString(),
@@ -38,13 +32,13 @@ const NewComment = ({ reply, username }: NewProps) => {
       ...data,
       comments: [...data.comments, newReply],
     });
-    console.log(newReply);
+    setTextArea('');
   };
 
   return (
     <form
-      className={`comment-wrapper items-[initial] mt-${
-        reply ? '2' : '8'
+      className={`comment-wrapper items-[initial] ${
+        reply ? 'mt-2' : 'mt-8'
       } justify-between`}
       onSubmit={handleSubmit}
     >
@@ -65,7 +59,6 @@ const NewComment = ({ reply, username }: NewProps) => {
         value={textArea}
         onChange={(e) => {
           setTextArea(e.target.value);
-          // console.log(textArea);
         }}
       ></textarea>
 

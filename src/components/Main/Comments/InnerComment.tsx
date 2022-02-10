@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CommentDetails from './CommentDetails';
 import VoteButton from './VoteButton';
-import { Props } from './Comments';
+import { CommentsProps } from './Comments';
 import NewComment from '../NewComment/NewComment';
 
 const InnerComment = ({
@@ -11,7 +11,7 @@ const InnerComment = ({
   user,
   id,
   replyingTo,
-}: Props) => {
+}: CommentsProps) => {
   const [replyField, setReplyField] = useState<boolean>(false);
   const { username } = user;
   return (

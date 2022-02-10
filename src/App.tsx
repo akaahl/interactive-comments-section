@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import Main from './components/Main/Main';
 import { atom, useRecoilState } from 'recoil';
-import { Props } from './components/Main/Comments/Comments';
+import { CommentsProps } from './components/Main/Comments/Comments';
+import Modal from './components/Modal/Modal';
 
 interface Data {
-  comments: Props[];
+  comments: CommentsProps[];
   currentUser: {
     image: {
       png: string;
@@ -15,7 +16,7 @@ interface Data {
 }
 
 export const dataAtom = atom({
-  key: 'dataAtom',
+  key: 'dataState',
   default: {} as Data,
 });
 
@@ -33,7 +34,7 @@ function App() {
     fetchData();
   }, []);
 
-  // console.log(data);
+  console.log('1 2 3');
 
   return (
     <div
@@ -41,6 +42,7 @@ function App() {
       py-16 font-rubik"
     >
       <Main />
+      {/* <Modal /> */}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Comments from './Comments/Comments';
 import NewComment from './NewComment/NewComment';
 import { useRecoilValue } from 'recoil';
@@ -29,6 +29,7 @@ const Main = () => {
             />
           )
         )}
+
       <NewComment />
     </main>
   );

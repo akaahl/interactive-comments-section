@@ -4,7 +4,7 @@ import CommentDetails from './CommentDetails';
 import InnerComment from './InnerComment';
 import VoteButton from './VoteButton';
 
-export interface Props {
+export interface CommentsProps {
   id?: number | undefined;
   content: string;
   createdAt: string;
@@ -29,7 +29,7 @@ const Comments = ({
   replies,
   user,
   newComment,
-}: Props) => {
+}: CommentsProps) => {
   const { username } = user;
   const [replyField, setReplyField] = useState<boolean>(false);
   return (

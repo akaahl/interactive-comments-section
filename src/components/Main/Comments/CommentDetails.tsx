@@ -1,10 +1,13 @@
-import { Props } from './Comments';
+import { CommentsProps } from './Comments';
 import DeleteButton from './DeleteButton';
 import EditButton from './Edit Button';
 import ReplyButton from './ReplyButton';
 import TimeAgo from 'timeago-react';
+import Modal from '../../Modal/Modal';
+import InnerModal from '../../Modal/InnerModal';
+import { useState } from 'react';
 
-interface NewProps extends Props {
+interface NewProps extends CommentsProps {
   replyField: boolean;
   setReplyField: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -12,11 +15,11 @@ interface NewProps extends Props {
 const CommentDetails = ({
   content,
   createdAt,
-  replies,
   user,
   replyField,
   setReplyField,
   newComment,
+  replyingTo,
 }: NewProps) => {
   const {
     username,
@@ -26,6 +29,8 @@ const CommentDetails = ({
   const imagePath = (path: string) => {
     return `/src/assets/${path}`;
   };
+
+  const [modal, setModal] = useState<boolean>(false);
 
   return (
     <div className="ml-6 flex-1 ">
@@ -56,9 +61,11 @@ const CommentDetails = ({
           </p>
         )}
 
+        {modal && <Modal setModal={setModal} modal={modal} />}
+
         {username === 'juliusomo' && (
           <div className="ml-auto mr-0 flex items-center">
-            <DeleteButton />
+            <DeleteButton setModal={setModal} modal={modal} />
             <EditButton />
           </div>
         )}
@@ -70,9 +77,9 @@ const CommentDetails = ({
 
       <div>
         <p className="mt-4 font-normal tracking-wide text-neutral-grayish-blue">
-          {replies?.length ? (
+          {replyingTo ? (
             <span className="mr-1 font-semibold text-primary-moderate-blue">
-              @maxblagun
+              @{replyingTo}
             </span>
           ) : null}
           {content}
