@@ -1,13 +1,16 @@
 import React, { Suspense } from 'react';
 import Comments from './Comments/Comments';
 import NewComment from './NewComment/NewComment';
-import { useRecoilValue } from 'recoil';
-import { dataAtom } from '../../App';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { Data, dataAtom, dataState, updateData } from '../../App';
 
 const Main = () => {
-  const data = useRecoilValue(dataAtom);
+  const data = useRecoilValue<Data>(dataState);
+  const [newData, setNewData] = useRecoilState(updateData);
+  // setNewData(data);
 
-  console.log(data);
+  // console.log(setNewData);
+  // console.log(data, '1');
 
   return (
     <main className="h-auto w-[700px]">

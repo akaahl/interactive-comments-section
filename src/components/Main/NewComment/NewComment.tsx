@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { dataAtom } from '../../../App';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { Data, dataAtom, dataState, updateData } from '../../../App';
 import { CommentsProps } from '../Comments/Comments';
 
 interface NewCommentProps {
@@ -9,7 +9,7 @@ interface NewCommentProps {
 }
 
 const NewComment = ({ reply = false, username }: NewCommentProps) => {
-  const [data, setData] = useRecoilState(dataAtom);
+  const data = useRecoilValue(dataState);
   const [textArea, setTextArea] = useState<string>('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -28,10 +28,11 @@ const NewComment = ({ reply = false, username }: NewCommentProps) => {
       newComment: true,
     };
 
-    setData({
-      ...data,
-      comments: [...data.comments, newReply],
-    });
+    // setData({
+    //   ...data,
+    //   comments: [...data.comments, newReply],
+    // });
+    console.log(data);
     setTextArea('');
   };
 
