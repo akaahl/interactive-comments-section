@@ -22,17 +22,27 @@ export const dataAtom = atom({
 
 export const dataState = selector({
   key: 'dataSelector',
-  get: async () => {
+  get: async ({ get }) => {
     const fetchedData = await fetch('../data.json').then((res) => res.json());
 
+    // const individualData = get(dataAtom);
+
+    // return individualData.comments ? individualData : fetchedData;
     return fetchedData;
   },
+  // set: ({ set }, newValue) => {
+  //   set(dataState, newValue);
+  // },
 });
 
-export const updateData = selector({
+export const updateData = selector<Data>({
   key: 'updateData',
-  get: ({ get }) => get(dataState),
-  set: ({ get, set }, newValue) => set(get(dataState), newValue),
+  get: ({ get }) => {
+    const initialData = get(dataState);
+    const individualData = get(dataAtom);
+
+    return individualData.comments ? individualData : initialData;
+  },
 });
 
 function App() {

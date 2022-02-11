@@ -5,12 +5,9 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { Data, dataAtom, dataState, updateData } from '../../App';
 
 const Main = () => {
-  const data = useRecoilValue<Data>(dataState);
-  const [newData, setNewData] = useRecoilState(updateData);
-  // setNewData(data);
-
-  // console.log(setNewData);
-  // console.log(data, '1');
+  const data = useRecoilValue<Data>(updateData);
+  // const data: Data = JSON.parse(localStorage.getItem('data') || '');
+  console.log(data, '1');
 
   return (
     <main className="h-auto w-[700px]">

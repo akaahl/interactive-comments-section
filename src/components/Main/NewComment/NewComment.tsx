@@ -9,7 +9,8 @@ interface NewCommentProps {
 }
 
 const NewComment = ({ reply = false, username }: NewCommentProps) => {
-  const data = useRecoilValue(dataState);
+  const data = useRecoilValue(updateData);
+  const setIndividualData = useSetRecoilState(dataAtom);
   const [textArea, setTextArea] = useState<string>('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -28,11 +29,11 @@ const NewComment = ({ reply = false, username }: NewCommentProps) => {
       newComment: true,
     };
 
-    // setData({
-    //   ...data,
-    //   comments: [...data.comments, newReply],
-    // });
-    console.log(data);
+    setIndividualData({
+      ...data,
+      comments: [...data.comments, newReply],
+    });
+    // console.log(individualData);
     setTextArea('');
   };
 
