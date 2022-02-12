@@ -1,8 +1,5 @@
 import React, { Suspense } from 'react';
-import Comments from './Comments/Comments';
 import NewComment from './NewComment/NewComment';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { Data, dataAtom, dataState, updatedData } from '../../App';
 import InnerMain from './InnerMain';
 import ReactLoading from 'react-loading';
 

@@ -44,6 +44,8 @@ const Comments = ({
           replyField={replyField}
           setReplyField={setReplyField}
           newComment={newComment}
+          id={id}
+          outerComment={true}
         />
       </section>
 

@@ -8,8 +8,10 @@ import InnerModal from '../../Modal/InnerModal';
 import { useState } from 'react';
 
 interface NewProps extends CommentsProps {
+  id: number | undefined;
   replyField: boolean;
   setReplyField: React.Dispatch<React.SetStateAction<boolean>>;
+  outerComment: boolean;
 }
 
 const CommentDetails = ({
@@ -20,6 +22,8 @@ const CommentDetails = ({
   setReplyField,
   newComment,
   replyingTo,
+  id,
+  outerComment,
 }: NewProps) => {
   const {
     username,
@@ -61,7 +65,14 @@ const CommentDetails = ({
           </p>
         )}
 
-        {modal && <Modal setModal={setModal} modal={modal} />}
+        {modal && (
+          <Modal
+            setModal={setModal}
+            modal={modal}
+            id={id}
+            outerComment={outerComment}
+          />
+        )}
 
         {username === 'juliusomo' && (
           <div className="ml-auto mr-0 flex items-center">

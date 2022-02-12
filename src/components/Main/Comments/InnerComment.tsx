@@ -27,6 +27,7 @@ const InnerComment = ({
           replyingTo={replyingTo}
           replyField={replyField}
           setReplyField={setReplyField}
+          outerComment={false}
         />
       </li>
       {replyField && <NewComment reply={true} username={username} />}

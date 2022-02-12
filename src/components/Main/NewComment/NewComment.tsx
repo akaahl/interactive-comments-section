@@ -16,8 +16,19 @@ const NewComment = ({ reply = false, username }: NewCommentProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const innerRepliesLength = () => {
+      let total = 0;
+      data.comments.forEach((comment: any) => {
+        total += comment.replies.length;
+      });
+
+      return total;
+    };
+
+    console.log(innerRepliesLength() + data.comments.length + 1);
+
     const newReply: CommentsProps = {
-      id: data.comments.length + 1,
+      id: data.comments.length + innerRepliesLength() + 1,
       content: textArea,
       createdAt: Date.now().toString(),
       replies: [],

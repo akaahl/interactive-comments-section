@@ -5,6 +5,7 @@ import Comments from './Comments/Comments';
 
 const InnerMain = () => {
   const data = useRecoilValue<Data>(updatedData);
+  console.log(data);
 
   return (
     <>
