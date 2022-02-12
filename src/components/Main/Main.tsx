@@ -2,35 +2,28 @@ import React, { Suspense } from 'react';
 import Comments from './Comments/Comments';
 import NewComment from './NewComment/NewComment';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { Data, dataAtom, dataState, updateData } from '../../App';
+import { Data, dataAtom, dataState, updatedData } from '../../App';
+import InnerMain from './InnerMain';
+import ReactLoading from 'react-loading';
 
 const Main = () => {
-  const data = useRecoilValue<Data>(updateData);
-  // const data: Data = JSON.parse(localStorage.getItem('data') || '');
-  console.log(data, '1');
-
   return (
     <main className="h-auto w-[700px]">
-      {data.comments &&
-        data.comments.map(
-          (
-            { id, content, createdAt, score, replies, user, newComment },
-            index
-          ) => (
-            <Comments
-              key={index}
-              id={id}
-              content={content}
-              createdAt={createdAt}
-              score={score}
-              replies={replies}
-              user={user}
-              newComment={newComment}
-            />
-          )
-        )}
+      <Suspense
+        fallback={
+          <ReactLoading
+            type="spin"
+            color="#5457b6"
+            className="relative top-1/2 left-1/2 translate-y-[-50%] translate-x-[-50%]"
+            height="40px"
+            width="40px"
+          />
+        }
+      >
+        <InnerMain />
 
-      <NewComment />
+        <NewComment />
+      </Suspense>
     </main>
   );
 };

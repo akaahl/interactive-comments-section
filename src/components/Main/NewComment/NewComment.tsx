@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { Data, dataAtom, dataState, updateData } from '../../../App';
+import { Data, dataAtom, dataState, updatedData } from '../../../App';
 import { CommentsProps } from '../Comments/Comments';
 
 interface NewCommentProps {
@@ -9,7 +9,7 @@ interface NewCommentProps {
 }
 
 const NewComment = ({ reply = false, username }: NewCommentProps) => {
-  const data = useRecoilValue(updateData);
+  const data = useRecoilValue(updatedData);
   const setIndividualData = useSetRecoilState(dataAtom);
   const [textArea, setTextArea] = useState<string>('');
 
@@ -46,7 +46,7 @@ const NewComment = ({ reply = false, username }: NewCommentProps) => {
     >
       <div className="flex items-center justify-center self-center">
         <img
-          src={`src/assets/${data?.currentUser?.image.webp.slice(1)}`}
+          src={`src/assets/${data.currentUser.image.webp.slice(1)}`}
           alt="current user"
           className="h-8 w-8 rounded-full object-cover"
         />
