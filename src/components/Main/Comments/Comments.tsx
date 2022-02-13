@@ -49,7 +49,14 @@ const Comments = ({
         />
       </section>
 
-      {replyField && <NewComment reply={true} username={username} />}
+      {replyField && (
+        <NewComment
+          reply={true}
+          username={username}
+          innerReply={true}
+          id={id}
+        />
+      )}
 
       {replies?.length ? (
         <ul
@@ -57,7 +64,10 @@ const Comments = ({
           before:h-full before:w-[2.5px] before:rounded-sm before:bg-neutral-light-gray before:content-['']"
         >
           {replies.map(
-            ({ content, createdAt, user, id, score, replyingTo }, index) => (
+            (
+              { content, createdAt, user, score, replyingTo, newComment },
+              index
+            ) => (
               <InnerComment
                 content={content}
                 createdAt={createdAt}
@@ -66,6 +76,7 @@ const Comments = ({
                 key={index}
                 score={score}
                 replyingTo={replyingTo}
+                newComment={newComment}
               />
             )
           )}

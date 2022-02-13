@@ -19,7 +19,7 @@ const Main = () => {
       >
         <InnerMain />
 
-        <NewComment />
+        <NewComment innerReply={false} />
       </Suspense>
     </main>
   );

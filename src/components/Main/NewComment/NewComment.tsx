@@ -1,14 +1,21 @@
 import React, { Suspense, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Data, dataAtom, dataState, updatedData } from '../../../App';
-import { CommentsProps } from '../Comments/Comments';
+import Comments, { CommentsProps } from '../Comments/Comments';
 
 interface NewCommentProps {
+  id?: number | undefined;
+  innerReply: boolean;
   reply?: boolean;
   username?: string;
 }
 
-const NewComment = ({ reply = false, username }: NewCommentProps) => {
+const NewComment = ({
+  reply = false,
+  username,
+  innerReply,
+  id,
+}: NewCommentProps) => {
   const data = useRecoilValue(updatedData);
   const setIndividualData = useSetRecoilState(dataAtom);
   const [textArea, setTextArea] = useState<string>('');
@@ -25,27 +32,66 @@ const NewComment = ({ reply = false, username }: NewCommentProps) => {
       return total;
     };
 
-    console.log(innerRepliesLength() + data.comments.length + 1);
+    if (innerReply) {
+      const newInnerReply = {
+        content: textArea,
+        createdAt: Date.now().toString(),
+        id: data.comments.length + innerRepliesLength() + 1,
+        replyingTo: username,
+        score: 0,
+        user: data.currentUser,
+        newComment: true,
+      };
 
-    const newReply: CommentsProps = {
-      id: data.comments.length + innerRepliesLength() + 1,
-      content: textArea,
-      createdAt: Date.now().toString(),
-      replies: [],
-      score: 0,
-      user: {
-        username: data.currentUser.username,
-        image: data.currentUser.image,
-      },
-      newComment: true,
-    };
+      // const newData = {
+      //   ...data,
+      //   comments: data.comments.map((comment: any) => {
+      //     comment.map((reply: any) => {
+      //       if (reply.id === id) {
+      //         return {
+      //           ...reply,
+      //           replies: { ...reply.replies, newData },
+      //         };
+      //       } else {
+      //         return reply;
+      //       }
+      //     });
+      //   }),
+      // };
+      const comments = data.comments;
+      const newComments = comments.map((comment: any) => {
+        if (comment.id === id) {
+          return { ...comment, replies: [...comment.replies, newInnerReply] };
+        } else {
+          return comment;
+        }
+      });
+      const newData = { ...data, comments: newComments };
 
-    setIndividualData({
-      ...data,
-      comments: [...data.comments, newReply],
-    });
-    // console.log(individualData);
-    setTextArea('');
+      console.log();
+      console.log(newComments);
+
+      setIndividualData(newData);
+    } else {
+      const newReply: CommentsProps = {
+        id: data.comments.length + innerRepliesLength() + 1,
+        content: textArea,
+        createdAt: Date.now().toString(),
+        replies: [],
+        score: 0,
+        user: {
+          username: data.currentUser.username,
+          image: data.currentUser.image,
+        },
+        newComment: true,
+      };
+
+      setIndividualData({
+        ...data,
+        comments: [...data.comments, newReply],
+      });
+      setTextArea('');
+    }
   };
 
   return (

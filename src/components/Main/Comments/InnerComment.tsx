@@ -11,6 +11,7 @@ const InnerComment = ({
   user,
   id,
   replyingTo,
+  newComment,
 }: CommentsProps) => {
   const [replyField, setReplyField] = useState<boolean>(false);
   const { username } = user;
@@ -28,9 +29,17 @@ const InnerComment = ({
           replyField={replyField}
           setReplyField={setReplyField}
           outerComment={false}
+          newComment={newComment}
         />
       </li>
-      {replyField && <NewComment reply={true} username={username} />}
+      {replyField && (
+        <NewComment
+          reply={true}
+          username={username}
+          innerReply={true}
+          id={id}
+        />
+      )}
     </>
   );
 };

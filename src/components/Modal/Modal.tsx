@@ -23,24 +23,24 @@ const Modal = ({ modal, setModal, id, outerComment }: ModalProps) => {
         comments: newOuterComment,
       };
       setIndividualData(newData);
+    } else {
+      const filteredInnerReplies = data.comments.map((comment: any) => {
+        if (comment.replies.length) {
+          return {
+            ...comment,
+            replies: comment.replies.filter((reply: any) => reply.id !== id),
+          };
+        }
+        return comment;
+      });
+
+      const newData = {
+        ...data,
+        comments: filteredInnerReplies,
+      };
+
+      setIndividualData(newData);
     }
-
-    const filteredInnerReplies = data.comments.map((comment: any) => {
-      if (comment.replies.length) {
-        return {
-          ...comment,
-          replies: comment.replies.filter((reply: any) => reply.id !== id),
-        };
-      }
-      return comment;
-    });
-
-    const newData = {
-      ...data,
-      comments: filteredInnerReplies,
-    };
-
-    setIndividualData(newData);
 
     // setIndividualData(filteredInnerReplies);
   };
