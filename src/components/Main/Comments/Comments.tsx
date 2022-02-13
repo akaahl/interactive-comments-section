@@ -22,7 +22,7 @@ export interface CommentsProps {
 }
 
 const Comments = ({
-  id,
+  id: outerId,
   content,
   createdAt,
   score,
@@ -44,7 +44,7 @@ const Comments = ({
           replyField={replyField}
           setReplyField={setReplyField}
           newComment={newComment}
-          id={id}
+          outerId={outerId}
           outerComment={true}
         />
       </section>
@@ -54,7 +54,8 @@ const Comments = ({
           reply={true}
           username={username}
           innerReply={true}
-          id={id}
+          outerId={outerId}
+          setReplyField={setReplyField}
         />
       )}
 
@@ -65,7 +66,7 @@ const Comments = ({
         >
           {replies.map(
             (
-              { content, createdAt, user, score, replyingTo, newComment },
+              { content, createdAt, user, score, replyingTo, newComment, id },
               index
             ) => (
               <InnerComment
@@ -73,6 +74,7 @@ const Comments = ({
                 createdAt={createdAt}
                 user={user}
                 id={id}
+                outerId={outerId}
                 key={index}
                 score={score}
                 replyingTo={replyingTo}

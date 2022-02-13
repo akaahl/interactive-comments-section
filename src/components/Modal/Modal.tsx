@@ -3,20 +3,21 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { dataAtom, updatedData } from '../../App';
 
 interface ModalProps {
+  outerId: number | undefined;
   id: number | undefined;
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
   outerComment: boolean;
 }
 
-const Modal = ({ modal, setModal, id, outerComment }: ModalProps) => {
+const Modal = ({ modal, setModal, id, outerComment, outerId }: ModalProps) => {
   const data = useRecoilValue(updatedData);
   const setIndividualData = useSetRecoilState(dataAtom);
 
   const handleDelete = () => {
     if (outerComment) {
       const newOuterComment = data.comments.filter(
-        (comment: any) => comment.id !== id
+        (comment: any) => comment.id !== outerId
       );
       const newData = {
         ...data,
@@ -40,9 +41,9 @@ const Modal = ({ modal, setModal, id, outerComment }: ModalProps) => {
       };
 
       setIndividualData(newData);
-    }
 
-    // setIndividualData(filteredInnerReplies);
+      console.log(id);
+    }
   };
 
   return createPortal(

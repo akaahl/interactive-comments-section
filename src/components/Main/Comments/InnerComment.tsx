@@ -4,6 +4,10 @@ import VoteButton from './VoteButton';
 import { CommentsProps } from './Comments';
 import NewComment from '../NewComment/NewComment';
 
+interface InnerCommentProps extends CommentsProps {
+  outerId?: number | undefined;
+}
+
 const InnerComment = ({
   score,
   content,
@@ -12,7 +16,8 @@ const InnerComment = ({
   id,
   replyingTo,
   newComment,
-}: CommentsProps) => {
+  outerId,
+}: InnerCommentProps) => {
   const [replyField, setReplyField] = useState<boolean>(false);
   const { username } = user;
   return (
@@ -37,7 +42,8 @@ const InnerComment = ({
           reply={true}
           username={username}
           innerReply={true}
-          id={id}
+          outerId={outerId}
+          setReplyField={setReplyField}
         />
       )}
     </>

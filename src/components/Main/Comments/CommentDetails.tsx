@@ -8,7 +8,8 @@ import InnerModal from '../../Modal/InnerModal';
 import { useState } from 'react';
 
 interface NewProps extends CommentsProps {
-  id: number | undefined;
+  outerId?: number | undefined;
+  id?: number | undefined;
   replyField: boolean;
   setReplyField: React.Dispatch<React.SetStateAction<boolean>>;
   outerComment: boolean;
@@ -23,6 +24,7 @@ const CommentDetails = ({
   newComment,
   replyingTo,
   id,
+  outerId,
   outerComment,
 }: NewProps) => {
   const {
@@ -71,6 +73,7 @@ const CommentDetails = ({
             modal={modal}
             id={id}
             outerComment={outerComment}
+            outerId={outerId}
           />
         )}
 

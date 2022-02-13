@@ -4,17 +4,19 @@ import { Data, dataAtom, dataState, updatedData } from '../../../App';
 import Comments, { CommentsProps } from '../Comments/Comments';
 
 interface NewCommentProps {
-  id?: number | undefined;
+  outerId?: number | undefined;
   innerReply: boolean;
   reply?: boolean;
   username?: string;
+  setReplyField?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const NewComment = ({
   reply = false,
   username,
   innerReply,
-  id,
+  outerId,
+  setReplyField,
 }: NewCommentProps) => {
   const data = useRecoilValue(updatedData);
   const setIndividualData = useSetRecoilState(dataAtom);
@@ -32,65 +34,39 @@ const NewComment = ({
       return total;
     };
 
-    if (innerReply) {
-      const newInnerReply = {
-        content: textArea,
-        createdAt: Date.now().toString(),
-        id: data.comments.length + innerRepliesLength() + 1,
-        replyingTo: username,
-        score: 0,
-        user: data.currentUser,
-        newComment: true,
-      };
+    const newReply: CommentsProps = {
+      id: data.comments.length + innerRepliesLength() + 1,
+      content: textArea,
+      createdAt: Date.now().toString(),
+      replies: !innerReply ? [] : undefined,
+      replyingTo: innerReply ? username : '',
+      score: 0,
+      user: data.currentUser,
+      newComment: true,
+    };
 
-      // const newData = {
-      //   ...data,
-      //   comments: data.comments.map((comment: any) => {
-      //     comment.map((reply: any) => {
-      //       if (reply.id === id) {
-      //         return {
-      //           ...reply,
-      //           replies: { ...reply.replies, newData },
-      //         };
-      //       } else {
-      //         return reply;
-      //       }
-      //     });
-      //   }),
-      // };
+    if (innerReply) {
       const comments = data.comments;
       const newComments = comments.map((comment: any) => {
-        if (comment.id === id) {
-          return { ...comment, replies: [...comment.replies, newInnerReply] };
+        if (comment.id === outerId) {
+          return { ...comment, replies: [...comment.replies, newReply] };
         } else {
           return comment;
         }
       });
       const newData = { ...data, comments: newComments };
 
-      console.log();
-      console.log(newComments);
-
       setIndividualData(newData);
     } else {
-      const newReply: CommentsProps = {
-        id: data.comments.length + innerRepliesLength() + 1,
-        content: textArea,
-        createdAt: Date.now().toString(),
-        replies: [],
-        score: 0,
-        user: {
-          username: data.currentUser.username,
-          image: data.currentUser.image,
-        },
-        newComment: true,
-      };
-
       setIndividualData({
         ...data,
         comments: [...data.comments, newReply],
       });
-      setTextArea('');
+    }
+
+    setTextArea('');
+    if (setReplyField) {
+      setReplyField(false);
     }
   };
 
