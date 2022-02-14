@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { dataAtom, updatedData } from '../../App';
+import { handleDelete } from '../../utils/handleDelete';
 
 interface ModalProps {
   outerId: number | undefined;
@@ -13,39 +14,6 @@ interface ModalProps {
 const Modal = ({ modal, setModal, id, outerComment, outerId }: ModalProps) => {
   const data = useRecoilValue(updatedData);
   const setIndividualData = useSetRecoilState(dataAtom);
-
-  const handleDelete = () => {
-    if (outerComment) {
-      const newOuterComment = data.comments.filter(
-        (comment: any) => comment.id !== outerId
-      );
-      const newData = {
-        ...data,
-        comments: newOuterComment,
-      };
-      setIndividualData(newData);
-    } else {
-      const filteredInnerReplies = data.comments.map((comment: any) => {
-        if (comment.replies.length) {
-          return {
-            ...comment,
-            replies: comment.replies.filter((reply: any) => reply.id !== id),
-          };
-        }
-        return comment;
-      });
-
-      const newData = {
-        ...data,
-        comments: filteredInnerReplies,
-      };
-
-      setIndividualData(newData);
-
-      console.log(id);
-    }
-    setModal(false);
-  };
 
   return createPortal(
     <div
@@ -79,7 +47,16 @@ const Modal = ({ modal, setModal, id, outerComment, outerId }: ModalProps) => {
             className="flex-[0.48] rounded-md bg-primary-soft-red py-3
             text-sm font-bold uppercase text-white transition-all duration-200 
             hover:bg-primary-pale-red"
-            onClick={handleDelete}
+            onClick={() => {
+              handleDelete(
+                data,
+                outerComment,
+                outerId,
+                setIndividualData,
+                setModal,
+                id
+              );
+            }}
           >
             Yes, Delete
           </button>

@@ -1,6 +1,7 @@
 import React, { Suspense, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Data, dataAtom, dataState, updatedData } from '../../../App';
+import { handleNewCommentSubmit } from '../../../utils/handleNewComment';
 import Comments, { CommentsProps } from '../Comments/Comments';
 
 interface NewCommentProps {
@@ -22,60 +23,24 @@ const NewComment = ({
   const setIndividualData = useSetRecoilState(dataAtom);
   const [textArea, setTextArea] = useState<string>('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const innerRepliesLength = () => {
-      let total = 0;
-      data.comments.forEach((comment: any) => {
-        total += comment.replies.length;
-      });
-
-      return total;
-    };
-
-    const newReply: CommentsProps = {
-      id: data.comments.length + innerRepliesLength() + 1,
-      content: textArea,
-      createdAt: Date.now().toString(),
-      replies: !innerReply ? [] : undefined,
-      replyingTo: innerReply ? username : '',
-      score: 0,
-      user: data.currentUser,
-      newComment: true,
-    };
-
-    if (innerReply) {
-      const comments = data.comments;
-      const newComments = comments.map((comment: any) => {
-        if (comment.id === outerId) {
-          return { ...comment, replies: [...comment.replies, newReply] };
-        } else {
-          return comment;
-        }
-      });
-      const newData = { ...data, comments: newComments };
-
-      setIndividualData(newData);
-    } else {
-      setIndividualData({
-        ...data,
-        comments: [...data.comments, newReply],
-      });
-    }
-
-    setTextArea('');
-    if (setReplyField) {
-      setReplyField(false);
-    }
-  };
-
   return (
     <form
       className={`comment-wrapper items-[initial] ${
         reply ? 'mt-2' : 'mt-8'
       } justify-between`}
-      onSubmit={handleSubmit}
+      onSubmit={(e) => {
+        handleNewCommentSubmit(
+          e,
+          data,
+          textArea,
+          innerReply,
+          username,
+          outerId,
+          setReplyField,
+          setIndividualData,
+          setTextArea
+        );
+      }}
     >
       <div className="flex items-center justify-center self-center">
         <img

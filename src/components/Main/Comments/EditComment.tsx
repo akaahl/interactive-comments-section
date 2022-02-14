@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { dataAtom, updatedData } from '../../../App';
+import { handleSubmit } from '../../../utils/HandleEdit';
 
 interface EditCommentProps {
   content: string;
@@ -21,57 +22,22 @@ const EditComment = ({
   const setIndividualData = useSetRecoilState(dataAtom);
   const [textArea, setTextArea] = useState<string>(content);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // console.log('submit');
-    // console.log('d')
-    const comments = data.comments;
-
-    if (outerComment) {
-      const newComments = comments.map((comment: any) => {
-        if (comment.id === outerId) {
-          return { ...comment, content: textArea };
-        } else {
-          return comment;
-        }
-      });
-
-      const newData = {
-        ...data,
-        comments: newComments,
-      };
-      setIndividualData(newData);
-      //   console.log(newData);
-    } else {
-      const newComments = comments.map((comment: any) => {
-        if (comment.replies.length) {
-          const newReplies = comment.replies.map((reply: any) => {
-            if (reply.id === id) {
-              return { ...reply, content: textArea };
-            } else {
-              return reply;
-            }
-          });
-
-          return { ...comment, replies: newReplies };
-        } else {
-          return comment;
-        }
-      });
-      const newData = {
-        ...data,
-        comments: newComments,
-      };
-
-      console.log(newComments);
-      setIndividualData(newData);
-    }
-
-    setEditComment(false);
-  };
-
   return (
-    <form className="mt-10 flex flex-col" onSubmit={handleSubmit}>
+    <form
+      className="mt-10 flex flex-col"
+      onSubmit={(e) => {
+        handleSubmit(
+          e,
+          data,
+          outerComment,
+          outerId,
+          textArea,
+          id,
+          setIndividualData,
+          setEditComment
+        );
+      }}
+    >
       <textarea
         name="edit-comment"
         id="edit-comment"
