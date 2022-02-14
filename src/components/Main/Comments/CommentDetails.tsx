@@ -1,11 +1,13 @@
 import { CommentsProps } from './Comments';
 import DeleteButton from './DeleteButton';
-import EditButton from './Edit Button';
+import EditButton from './EditButton';
 import ReplyButton from './ReplyButton';
 import TimeAgo from 'timeago-react';
 import Modal from '../../Modal/Modal';
 import InnerModal from '../../Modal/InnerModal';
 import { useState } from 'react';
+import TextArea from './EditComment';
+import EditComment from './EditComment';
 
 interface NewProps extends CommentsProps {
   outerId?: number | undefined;
@@ -37,6 +39,7 @@ const CommentDetails = ({
   };
 
   const [modal, setModal] = useState<boolean>(false);
+  const [editComment, setEditComment] = useState<boolean>(false);
 
   return (
     <div className="ml-6 flex-1 ">
@@ -80,7 +83,10 @@ const CommentDetails = ({
         {username === 'juliusomo' && (
           <div className="ml-auto mr-0 flex items-center">
             <DeleteButton setModal={setModal} modal={modal} />
-            <EditButton />
+            <EditButton
+              editComment={editComment}
+              setEditComment={setEditComment}
+            />
           </div>
         )}
 
@@ -90,14 +96,26 @@ const CommentDetails = ({
       </div>
 
       <div>
-        <p className="mt-4 font-normal tracking-wide text-neutral-grayish-blue">
-          {replyingTo ? (
-            <span className="mr-1 font-semibold text-primary-moderate-blue">
-              @{replyingTo}
-            </span>
-          ) : null}
-          {content}
-        </p>
+        {!editComment && (
+          <p className="mt-4 font-normal tracking-wide text-neutral-grayish-blue">
+            {replyingTo ? (
+              <span className="mr-1 font-semibold text-primary-moderate-blue">
+                @{replyingTo}
+              </span>
+            ) : null}
+            {content}
+          </p>
+        )}
+
+        {editComment && (
+          <EditComment
+            content={content}
+            outerComment={outerComment}
+            outerId={outerId}
+            id={id}
+            setEditComment={setEditComment}
+          />
+        )}
       </div>
     </div>
   );

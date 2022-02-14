@@ -92,9 +92,7 @@ const NewComment = ({
         className="bg border-color-primary-light-grayish-blue mx-4 h-28 flex-1 resize-none rounded-lg 
         border-[1px] border-solid px-6 pt-2"
         value={textArea}
-        onChange={(e) => {
-          setTextArea(e.target.value);
-        }}
+        onChange={(e) => setTextArea(e.target.value)}
       ></textarea>
 
       <button

@@ -44,6 +44,7 @@ const Modal = ({ modal, setModal, id, outerComment, outerId }: ModalProps) => {
 
       console.log(id);
     }
+    setModal(false);
   };
 
   return createPortal(
