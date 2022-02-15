@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import NewComment from './NewComment/NewComment';
 import InnerMain from './InnerMain';
 import ReactLoading from 'react-loading';

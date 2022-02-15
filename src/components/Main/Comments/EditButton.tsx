@@ -1,9 +1,5 @@
 import React from 'react';
-
-interface EditButtonProps {
-  editComment: boolean;
-  setEditComment: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { EditButtonProps } from '../../../interfaces/interfaces';
 
 const EditButton = ({ editComment, setEditComment }: EditButtonProps) => {
   const handleEdit = () => {

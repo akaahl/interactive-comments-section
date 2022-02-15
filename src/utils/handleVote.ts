@@ -1,24 +1,25 @@
 import { SetterOrUpdater } from 'recoil';
 import { Data } from '../interfaces/interfaces';
 
-export const handleEdit = (
-  e: React.FormEvent,
+export const handleVote = (
+  action: string,
   data: any,
-  outerComment: boolean,
+  setData: SetterOrUpdater<Data>,
   outerId: number | undefined,
-  textArea: string,
-  id: number | undefined,
-  setIndividualData: SetterOrUpdater<Data>,
-  setEditComment: React.Dispatch<React.SetStateAction<boolean>>
+  id: number | undefined
 ) => {
-  e.preventDefault();
   const comments = data.comments;
   let newComments, newData;
 
-  if (outerComment) {
+  if (outerId) {
     newComments = comments.map((comment: any) => {
       if (comment.id === outerId) {
-        return { ...comment, content: textArea };
+        let score = comment.score;
+        return {
+          ...comment,
+          score: action === 'plus' ? (score += 1) : (score -= 1),
+          voted: true,
+        };
       }
       return comment;
     });
@@ -30,13 +31,21 @@ export const handleEdit = (
   } else {
     newComments = comments.map((comment: any) => {
       if (comment.replies.length) {
-        const newReplies = comment.replies.map((reply: any) => {
+        const newInnerReplies = comment.replies.map((reply: any) => {
           if (reply.id === id) {
-            return { ...reply, content: textArea };
+            let score = reply.score;
+            return {
+              ...reply,
+              voted: true,
+              score: action === 'plus' ? (score += 1) : (score -= 1),
+            };
           }
           return reply;
         });
-        return { ...comment, replies: newReplies };
+        return {
+          ...comment,
+          replies: newInnerReplies,
+        };
       }
       return comment;
     });
@@ -47,6 +56,5 @@ export const handleEdit = (
     };
   }
 
-  setIndividualData(newData);
-  setEditComment(false);
+  setData(newData);
 };

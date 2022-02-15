@@ -1,18 +1,8 @@
 import { Suspense, useEffect, useState } from 'react';
 import Main from './components/Main/Main';
 import { atom, selector, selectorFamily, useRecoilState } from 'recoil';
-import { CommentsProps } from './components/Main/Comments/Comments';
-
-export interface Data {
-  comments: CommentsProps[];
-  currentUser: {
-    image: {
-      png: string;
-      webp: string;
-    };
-    username: string;
-  };
-}
+// import { CommentsProps } from './components/Main/Comments/Comments';
+import { Data } from './interfaces/interfaces';
 
 export const dataAtom = atom({
   key: 'dataState',

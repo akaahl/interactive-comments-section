@@ -1,15 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { dataAtom, updatedData } from '../../../App';
-import { handleSubmit } from '../../../utils/HandleEdit';
-
-interface EditCommentProps {
-  content: string;
-  outerComment: boolean;
-  outerId?: number | undefined;
-  id?: number | undefined;
-  setEditComment: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { EditCommentProps } from '../../../interfaces/interfaces';
+import { handleEdit } from '../../../utils/handleEdit';
 
 const EditComment = ({
   content,
@@ -26,7 +19,7 @@ const EditComment = ({
     <form
       className="mt-10 flex flex-col"
       onSubmit={(e) => {
-        handleSubmit(
+        handleEdit(
           e,
           data,
           outerComment,

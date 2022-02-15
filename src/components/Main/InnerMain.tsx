@@ -1,6 +1,6 @@
-import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { Data, updatedData } from '../../App';
+import { updatedData } from '../../App';
+import { Data } from '../../interfaces/interfaces';
 import Comments from './Comments/Comments';
 
 const InnerMain = () => {
@@ -12,7 +12,7 @@ const InnerMain = () => {
       {data.comments &&
         data.comments.map(
           (
-            { id, content, createdAt, score, replies, user, newComment },
+            { id, content, createdAt, score, replies, user, newComment, voted },
             index
           ) => (
             <Comments
@@ -24,6 +24,7 @@ const InnerMain = () => {
               replies={replies}
               user={user}
               newComment={newComment}
+              voted={voted}
             />
           )
         )}

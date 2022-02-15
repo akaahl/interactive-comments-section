@@ -1,21 +1,11 @@
-import { CommentsProps } from './Comments';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import ReplyButton from './ReplyButton';
 import TimeAgo from 'timeago-react';
 import Modal from '../../Modal/Modal';
-import InnerModal from '../../Modal/InnerModal';
 import { useState } from 'react';
-import TextArea from './EditComment';
 import EditComment from './EditComment';
-
-interface NewProps extends CommentsProps {
-  outerId?: number | undefined;
-  id?: number | undefined;
-  replyField: boolean;
-  setReplyField: React.Dispatch<React.SetStateAction<boolean>>;
-  outerComment: boolean;
-}
+import { CommentDetailsProps } from '../../../interfaces/interfaces';
 
 const CommentDetails = ({
   content,
@@ -28,7 +18,7 @@ const CommentDetails = ({
   id,
   outerId,
   outerComment,
-}: NewProps) => {
+}: CommentDetailsProps) => {
   const {
     username,
     image: { webp },

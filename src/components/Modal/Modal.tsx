@@ -19,9 +19,7 @@ const Modal = ({ modal, setModal, id, outerComment, outerId }: ModalProps) => {
     <div
       className="fixed top-0 bottom-0 right-0 left-0 flex items-center
                 justify-center bg-black bg-opacity-40"
-      onClick={(e) => {
-        setModal(!modal);
-      }}
+      onClick={() => setModal(!modal)}
     >
       <aside
         className="w-[400px] rounded-lg bg-white p-8"

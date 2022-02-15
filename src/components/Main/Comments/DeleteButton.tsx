@@ -1,7 +1,4 @@
-interface DeleteProps {
-  modal: boolean;
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { DeleteProps } from '../../../interfaces/interfaces';
 
 const DeleteButton = ({ setModal, modal }: DeleteProps) => {
   return (

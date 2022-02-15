@@ -1,5 +1,5 @@
 import { SetterOrUpdater } from 'recoil';
-import { Data } from '../App';
+import { Data } from '../interfaces/interfaces';
 
 export const handleNewCommentSubmit = (
   e: React.FormEvent,

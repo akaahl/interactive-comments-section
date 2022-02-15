@@ -1,16 +1,8 @@
-import React, { Suspense, useState } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { Data, dataAtom, dataState, updatedData } from '../../../App';
+import { useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { dataAtom, updatedData } from '../../../App';
+import { NewCommentProps } from '../../../interfaces/interfaces';
 import { handleNewCommentSubmit } from '../../../utils/handleNewComment';
-import Comments, { CommentsProps } from '../Comments/Comments';
-
-interface NewCommentProps {
-  outerId?: number | undefined;
-  innerReply: boolean;
-  reply?: boolean;
-  username?: string;
-  setReplyField?: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
 const NewComment = ({
   reply = false,

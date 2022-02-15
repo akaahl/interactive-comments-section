@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import CommentDetails from './CommentDetails';
 import VoteButton from './VoteButton';
-import { CommentsProps } from './Comments';
 import NewComment from '../NewComment/NewComment';
-
-interface InnerCommentProps extends CommentsProps {
-  outerId?: number | undefined;
-}
+import { InnerCommentProps } from '../../../interfaces/interfaces';
 
 const InnerComment = ({
   score,
@@ -17,13 +13,14 @@ const InnerComment = ({
   replyingTo,
   newComment,
   outerId,
+  voted,
 }: InnerCommentProps) => {
   const [replyField, setReplyField] = useState<boolean>(false);
   const { username } = user;
   return (
     <>
       <li className="comment-wrapper not-first:mt-2">
-        <VoteButton score={score} username={username} />
+        <VoteButton score={score} username={username} id={id} voted={voted} />
         <CommentDetails
           content={content}
           createdAt={createdAt}

@@ -1,11 +1,6 @@
-import React from 'react';
+import { ReplyButtonProps } from '../../../interfaces/interfaces';
 
-interface Props {
-  replyField: boolean;
-  setReplyField: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const ReplyButton = ({ setReplyField, replyField }: Props) => {
+const ReplyButton = ({ setReplyField, replyField }: ReplyButtonProps) => {
   return (
     <button
       className="group ml-auto mr-0 flex items-center"

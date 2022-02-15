@@ -1,25 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { CommentsProps } from '../../../interfaces/interfaces';
 import NewComment from '../NewComment/NewComment';
 import CommentDetails from './CommentDetails';
 import InnerComment from './InnerComment';
 import VoteButton from './VoteButton';
-
-export interface CommentsProps {
-  id?: number | undefined;
-  content: string;
-  createdAt: string;
-  score?: number;
-  replies?: [];
-  replyingTo?: string;
-  user: {
-    username: string | undefined;
-    image: {
-      png: string;
-      webp: string;
-    };
-  };
-  newComment?: boolean;
-}
 
 const Comments = ({
   id: outerId,
@@ -29,13 +13,19 @@ const Comments = ({
   replies,
   user,
   newComment,
+  voted,
 }: CommentsProps) => {
   const { username } = user;
   const [replyField, setReplyField] = useState<boolean>(false);
   return (
     <>
       <section className="comment-wrapper not-first:mt-6">
-        <VoteButton score={score} username={username} />
+        <VoteButton
+          score={score}
+          username={username}
+          outerId={outerId}
+          voted={voted}
+        />
         <CommentDetails
           content={content}
           createdAt={createdAt}
@@ -66,7 +56,16 @@ const Comments = ({
         >
           {replies.map(
             (
-              { content, createdAt, user, score, replyingTo, newComment, id },
+              {
+                content,
+                createdAt,
+                user,
+                score,
+                replyingTo,
+                newComment,
+                id,
+                voted,
+              },
               index
             ) => (
               <InnerComment
@@ -79,6 +78,7 @@ const Comments = ({
                 score={score}
                 replyingTo={replyingTo}
                 newComment={newComment}
+                voted={voted}
               />
             )
           )}
