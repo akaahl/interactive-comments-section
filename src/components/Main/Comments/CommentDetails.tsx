@@ -6,6 +6,7 @@ import Modal from '../../Modal/Modal';
 import { useState } from 'react';
 import EditComment from './EditComment';
 import { CommentDetailsProps } from '../../../interfaces/interfaces';
+import VoteButton from './VoteButton';
 
 const CommentDetails = ({
   content,
@@ -18,6 +19,8 @@ const CommentDetails = ({
   id,
   outerId,
   outerComment,
+  score,
+  voted,
 }: CommentDetailsProps) => {
   const {
     username,
@@ -32,7 +35,7 @@ const CommentDetails = ({
   const [editComment, setEditComment] = useState<boolean>(false);
 
   return (
-    <div className="ml-6 flex-1 ">
+    <div className="flex-1 md:ml-6 ">
       <div className="flex items-center">
         <div className="flex h-8 w-8 items-center justify-center rounded-full">
           <img src={imagePath(webp)} alt="user" className="object-cover" />
@@ -71,7 +74,7 @@ const CommentDetails = ({
         )}
 
         {username === 'juliusomo' && (
-          <div className="ml-auto mr-0 flex items-center">
+          <div className="ml-auto mr-0 hidden items-center md:flex">
             <DeleteButton setModal={setModal} modal={modal} />
             <EditButton
               editComment={editComment}
@@ -81,7 +84,11 @@ const CommentDetails = ({
         )}
 
         {username !== 'juliusomo' && (
-          <ReplyButton setReplyField={setReplyField} replyField={replyField} />
+          <ReplyButton
+            setReplyField={setReplyField}
+            replyField={replyField}
+            mobile={false}
+          />
         )}
       </div>
 
@@ -105,6 +112,34 @@ const CommentDetails = ({
             id={id}
             setEditComment={setEditComment}
           />
+        )}
+      </div>
+
+      <div className="mt-6 flex items-center justify-between">
+        <VoteButton
+          score={score}
+          username={username}
+          outerId={outerId}
+          voted={voted}
+          mobile={true}
+        />
+
+        {username !== 'juliusomo' && (
+          <ReplyButton
+            setReplyField={setReplyField}
+            replyField={replyField}
+            mobile={true}
+          />
+        )}
+
+        {username === 'juliusomo' && (
+          <div className="ml-auto mr-0 flex items-center md:hidden">
+            <DeleteButton setModal={setModal} modal={modal} />
+            <EditButton
+              editComment={editComment}
+              setEditComment={setEditComment}
+            />
+          </div>
         )}
       </div>
     </div>

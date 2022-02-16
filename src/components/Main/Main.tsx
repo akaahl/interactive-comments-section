@@ -5,7 +5,7 @@ import ReactLoading from 'react-loading';
 
 const Main = () => {
   return (
-    <main className="h-auto w-[700px]">
+    <main className="h-auto w-[95%] md:w-[700px] 2xl:w-[60%]">
       <Suspense
         fallback={
           <ReactLoading

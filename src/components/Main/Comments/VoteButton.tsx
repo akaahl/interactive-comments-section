@@ -11,17 +11,22 @@ const VoteButton = ({
   outerId,
   voted,
   id,
+  mobile,
 }: VoteButtonProps) => {
   const data = useRecoilValue(updatedData);
   const setData = useSetRecoilState(dataAtom);
 
   return (
     <div
-      className={`flex flex-col items-center rounded-md ${
+      className={` items-center rounded-md  ${
         username === 'juliusomo'
           ? 'bg-neutral-very-light-gray/50'
           : 'bg-neutral-very-light-gray'
-      } p-4`}
+      }  ${
+        mobile
+          ? 'flex flex-row-reverse p-3 md:hidden'
+          : 'hidden flex-col p-4 md:flex'
+      }`}
     >
       <button
         disabled={username === 'juliusomo' || voted ? true : false}
@@ -30,7 +35,7 @@ const VoteButton = ({
         <img src={plusIcon} alt="plus" />
       </button>
       <span
-        className={`my-4 font-semibold ${
+        className={`${mobile ? 'mx-4' : 'my-4'}  font-semibold ${
           username === 'juliusomo' || voted
             ? 'text-primary-light-grayish-blue'
             : 'text-primary-moderate-blue'

@@ -6,6 +6,6 @@
 
 @layer components {
   .comment-wrapper {
-    @apply flex w-full items-start rounded-md bg-white p-6;
+    @apply flex w-full flex-col items-start rounded-md bg-white p-6 md:flex-row;
   }
 }

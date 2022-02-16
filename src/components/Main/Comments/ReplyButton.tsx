@@ -1,9 +1,15 @@
 import { ReplyButtonProps } from '../../../interfaces/interfaces';
 
-const ReplyButton = ({ setReplyField, replyField }: ReplyButtonProps) => {
+const ReplyButton = ({
+  setReplyField,
+  replyField,
+  mobile,
+}: ReplyButtonProps) => {
   return (
     <button
-      className="group ml-auto mr-0 flex items-center"
+      className={`group ml-auto mr-0 ${
+        mobile ? 'flex md:hidden' : 'hidden md:flex'
+      } items-center `}
       onClick={() => setReplyField(!replyField)}
     >
       <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg">

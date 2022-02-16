@@ -33,6 +33,8 @@ export interface CommentDetailsProps extends CommentsProps {
   replyField: boolean;
   setReplyField: React.Dispatch<React.SetStateAction<boolean>>;
   outerComment: boolean;
+  score?: number | undefined;
+  voted?: boolean | undefined;
 }
 
 export interface InnerCommentProps extends CommentsProps {
@@ -54,6 +56,7 @@ export interface VoteButtonProps {
   outerId?: number | undefined;
   id?: number | undefined;
   voted: boolean | undefined;
+  mobile: boolean;
 }
 
 export interface DeleteProps {
@@ -69,6 +72,7 @@ export interface EditButtonProps {
 export interface ReplyButtonProps {
   replyField: boolean;
   setReplyField: React.Dispatch<React.SetStateAction<boolean>>;
+  mobile: boolean;
 }
 
 export interface EditCommentProps {

@@ -25,6 +25,7 @@ const Comments = ({
           username={username}
           outerId={outerId}
           voted={voted}
+          mobile={false}
         />
         <CommentDetails
           content={content}
@@ -36,6 +37,8 @@ const Comments = ({
           newComment={newComment}
           outerId={outerId}
           outerComment={true}
+          score={score}
+          voted={voted}
         />
       </section>
 
@@ -51,8 +54,9 @@ const Comments = ({
 
       {replies?.length ? (
         <ul
-          className="relative mt-5 flex flex-col pl-20 before:absolute before:left-10 
-          before:h-full before:w-[2.5px] before:rounded-sm before:bg-neutral-light-gray before:content-['']"
+          className="relative mt-5 flex flex-col md:pl-20 md:before:absolute md:before:left-10 
+          md:before:h-full md:before:w-[2.5px] md:before:rounded-sm md:before:bg-neutral-light-gray 
+          md:before:content-[''] "
         >
           {replies.map(
             (
