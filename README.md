@@ -19,8 +19,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://interactive-comments-section-blond.vercel.app/)
+- Solution URL: [FrontEnd Mentor solution](https://www.frontendmentor.io/solutions/interactive-comments-section-vite-react-typescript-recoil-NZaUsG42s)
+- Live Site URL: [Live demo](https://interactive-comments-section-blond.vercel.app/)
 
 ## My process
 
