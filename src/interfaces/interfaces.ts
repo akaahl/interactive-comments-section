@@ -9,13 +9,30 @@ export interface Data {
   };
 }
 
+interface Replies {
+  content: string;
+  createdAt: string;
+  id: number;
+  replyingTo: string;
+  score: number;
+  user: {
+    image: {
+      png: string;
+      webp: string;
+    };
+    username: string;
+  };
+  voted?: boolean | undefined;
+  newComment?: boolean | undefined;
+}
+
 export interface CommentsProps {
   id?: number | undefined;
   content: string;
   createdAt: string;
-  score?: number;
-  replies?: [];
-  replyingTo?: string;
+  score?: number | undefined;
+  replies?: Replies[] | undefined;
+  replyingTo?: string | undefined;
   voted?: boolean | undefined;
   user: {
     username: string | undefined;
@@ -24,7 +41,7 @@ export interface CommentsProps {
       webp: string;
     };
   };
-  newComment?: boolean;
+  newComment?: boolean | undefined;
 }
 
 export interface CommentDetailsProps extends CommentsProps {

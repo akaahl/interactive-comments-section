@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { dataAtom, updatedData } from '../../../App';
 import { EditCommentProps } from '../../../interfaces/interfaces';
+import { dataAtom, updatedData } from '../../../stores/stores';
 import { handleEdit } from '../../../utils/handleEdit';
 
 const EditComment = ({

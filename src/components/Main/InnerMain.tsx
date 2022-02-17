@@ -1,11 +1,10 @@
 import { useRecoilValue } from 'recoil';
-import { updatedData } from '../../App';
 import { Data } from '../../interfaces/interfaces';
 import Comments from './Comments/Comments';
+import { updatedData } from '../../stores/stores';
 
 const InnerMain = () => {
   const data = useRecoilValue<Data>(updatedData);
-  console.log(data);
 
   return (
     <>

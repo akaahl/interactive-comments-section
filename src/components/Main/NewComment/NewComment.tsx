@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { dataAtom, updatedData } from '../../../App';
 import { NewCommentProps } from '../../../interfaces/interfaces';
+import { dataAtom, updatedData } from '../../../stores/stores';
 import { handleNewCommentSubmit } from '../../../utils/handleNewComment';
 
 const NewComment = ({
@@ -36,7 +36,7 @@ const NewComment = ({
     >
       <div className="hidden items-center justify-center self-center md:flex">
         <img
-          src={`src/assets/${data.currentUser.image.webp.slice(1)}`}
+          src={`${data.currentUser.image.webp}`}
           alt="current user"
           className="h-8 w-8 rounded-full object-cover"
         />
@@ -64,7 +64,7 @@ const NewComment = ({
       <div className="mt-4 flex w-full items-center justify-between md:hidden">
         <div className="flex  items-center justify-center self-center ">
           <img
-            src={`src/assets/${data.currentUser.image.webp.slice(1)}`}
+            src={data.currentUser.image.webp}
             alt="current user"
             className="h-8 w-8 rounded-full object-cover"
           />

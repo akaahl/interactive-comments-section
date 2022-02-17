@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { dataAtom, updatedData } from '../../App';
+import { dataAtom, updatedData } from '../../stores/stores';
 import { handleDelete } from '../../utils/handleDelete';
 
 interface ModalProps {

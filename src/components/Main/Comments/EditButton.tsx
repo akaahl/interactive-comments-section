@@ -1,4 +1,3 @@
-import React from 'react';
 import { EditButtonProps } from '../../../interfaces/interfaces';
 
 const EditButton = ({ editComment, setEditComment }: EditButtonProps) => {

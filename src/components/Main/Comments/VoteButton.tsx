@@ -1,9 +1,9 @@
 import plusIcon from '../../../assets/images/icon-plus.svg';
 import minusIcon from '../../../assets/images/icon-minus.svg';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { dataAtom, updatedData } from '../../../App';
 import { handleVote } from '../../../utils/handleVote';
 import { VoteButtonProps } from '../../../interfaces/interfaces';
+import { dataAtom, updatedData } from '../../../stores/stores';
 
 const VoteButton = ({
   score,

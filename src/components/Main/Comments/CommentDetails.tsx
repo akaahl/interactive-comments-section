@@ -27,18 +27,14 @@ const CommentDetails = ({
     image: { webp },
   } = user;
 
-  const imagePath = (path: string) => {
-    return `/src/assets/${path}`;
-  };
-
   const [modal, setModal] = useState<boolean>(false);
   const [editComment, setEditComment] = useState<boolean>(false);
 
   return (
-    <div className="flex-1 md:ml-6 ">
+    <div className="w-full md:ml-6 md:flex-1">
       <div className="flex items-center">
         <div className="flex h-8 w-8 items-center justify-center rounded-full">
-          <img src={imagePath(webp)} alt="user" className="object-cover" />
+          <img src={webp} alt="user" className="object-cover" />
         </div>
         <p className="ml-3 font-medium">{username}</p>
         {username === 'juliusomo' ? (
